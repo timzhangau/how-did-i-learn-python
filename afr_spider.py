@@ -59,6 +59,7 @@ def parse_article(url):
     tree = html.fromstring(page.content)
 
     article = {}
+    article["url"] = url
     article["title"] = tree.xpath("//head//meta[@property='og:title']/@content")[0]
     article["published_date"] = tree.xpath("//head//meta[@property='article:published_time']/@content")[0]
     author_meta = tree.xpath("//head//meta[@name='parsely-author']/@content")
@@ -83,7 +84,7 @@ def save_to_csv(articles_list):
 
 
 def main():
-    article_urls = search_for_artiles_by_date("2020-04-08")
+    article_urls = search_for_artiles_by_date("2020-04-10")
     articles_list = parse_articles_list(article_urls)
     save_to_csv(articles_list)
 
